@@ -25,15 +25,17 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Common;
 
-namespace SonarAnalyzer
+namespace SonarAnalyzer.Helpers
 {
-    public class CyclomaticComplexityWalker : CSharpSyntaxWalker
+    public class CyclomaticComplexityWalker : CSharpSyntaxWalker, IMetricsWalker
     {
         private readonly IList<SecondaryLocation> incrementLocations = new List<SecondaryLocation>();
 
-        public IEnumerable<SecondaryLocation> IncrementLocations => incrementLocations;
+        public bool Success => true;
 
-        public int CyclomaticComplexity => incrementLocations.Count;
+        public int MetricValue => incrementLocations.Count;
+
+        public IEnumerable<SecondaryLocation> Locations => incrementLocations;
 
         public override void VisitMethodDeclaration(MethodDeclarationSyntax node)
         {

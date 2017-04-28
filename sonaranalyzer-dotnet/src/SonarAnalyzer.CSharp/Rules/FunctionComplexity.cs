@@ -100,15 +100,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
             walker.Visit(nodeToCheck);
 
-            if (walker.CyclomaticComplexity > Maximum)
+            if (walker.MetricValue > Maximum)
             {
                 context.ReportDiagnostic(
                     Diagnostic.Create(
                         rule,
                         getLocation(node),
-                        walker.IncrementLocations.ToAdditionalLocations(),
-                        walker.IncrementLocations.ToProperties(),
-                        new object[] { Maximum, walker.CyclomaticComplexity, declarationType}));
+                        walker.Locations.ToAdditionalLocations(),
+                        walker.Locations.ToProperties(),
+                        new object[] { Maximum, walker.MetricValue, declarationType}));
             }
         }
     }

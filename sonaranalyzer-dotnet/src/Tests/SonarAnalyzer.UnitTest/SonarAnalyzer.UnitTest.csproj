@@ -131,6 +131,7 @@
     <Compile Include="Common\RuleDescriptorTest.cs" />
     <Compile Include="Common\RuleFinderTest.cs" />
     <Compile Include="Common\RuleTest.cs" />
+    <Compile Include="Helpers\ExecutableLinesWalkerTest.cs" />
     <Compile Include="Helpers\FlowAnalysis\ProgramStateTests.cs" />
     <Compile Include="Helpers\FlowAnalysis\ProgramPointTests.cs" />
     <Compile Include="Helpers\FlowAnalysis\ExplodedGraphTest.cs" />
