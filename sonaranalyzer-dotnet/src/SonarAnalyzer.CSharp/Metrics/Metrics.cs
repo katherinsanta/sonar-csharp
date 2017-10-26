@@ -25,12 +25,15 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Common.CSharp
+namespace SonarAnalyzer.Metrics.CSharp
 {
     public class Metrics : MetricsBase
     {
+        private ExecutableLinesCalculator executableLinesCalculator = new ExecutableLinesCalculator();
+
         public Metrics(SyntaxTree tree) : base(tree)
         {
             var root = tree.GetRoot();
@@ -39,6 +42,9 @@ namespace SonarAnalyzer.Common.CSharp
                 throw new ArgumentException(InitalizationErrorTextPattern, nameof(tree));
             }
         }
+
+        public override int GetExecutableLinesCount()
+            => executableLinesCalculator.CountLines(tree);
 
         protected override bool IsEndOfFile(SyntaxToken token) => token.IsKind(SyntaxKind.EndOfFileToken);
 
